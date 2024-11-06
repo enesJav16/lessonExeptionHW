@@ -1,4 +1,5 @@
 
+    import java.util.InputMismatchException;
     import java.util.Scanner;
 
     public class Parelellepiped {
@@ -57,6 +58,7 @@
             while(check) {
                 int heightInput=0;
                 int widthInput=0;
+                int lengthInput=0;
                 try {
                     System.out.println("Give height(cm):");
                     heightInput = scanner.nextInt();
@@ -67,15 +69,28 @@
                     }
                     System.out.println("Give width(cm):");
                     widthInput = scanner.nextInt();
-                    System.out.println("Give length(cm):");
-                    int lengthInput = scanner.nextInt();
-                    if (  lengthInput <= 0 || widthInput <= 0) {
-                        throw new ArithmeticException("Sides can't be negative or zero.");
-                    } else {
+                    if( widthInput <= 0){
+                        System.out.println("Width can't be negative or zero.");
                         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                        parelellepipedArea(heightInput, widthInput, lengthInput);
-                        parelellepipedVolume(heightInput, widthInput, lengthInput);
+                        continue;
                     }
+                    System.out.println("Give length(cm):");
+                    lengthInput = scanner.nextInt();
+                    if ( lengthInput <= 0  ) {
+                        System.out.println("Length can't be negative or zero.");
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                        continue;
+                    }
+                    check=false;
+                }
+                catch (InputMismatchException e){
+                    System.out.println("Give number.");
+                    scanner.nextLine();
+                }
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                if(!check){
+                    parelellepipedArea(heightInput, widthInput, lengthInput);
+                    parelellepipedVolume(heightInput, widthInput, lengthInput);
                 }
             }
         }
